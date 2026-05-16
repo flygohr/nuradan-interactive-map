@@ -27,7 +27,7 @@
         var ne = map.unproject([60 * tileSize, 0], maxZoom);
         var bounds = L.latLngBounds(sw, ne);
 
-        let layer = L.tileLayer('images/mapv5/{z}/{x}/{y}.png', {
+        let layer = L.tileLayer('images/mapv1/{z}/{x}/{y}.png', {
             noWrap: true,
             bounds: bounds,
             minZoom: 5,
