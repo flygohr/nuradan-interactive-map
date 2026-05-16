@@ -12,22 +12,32 @@
     <div id="map" style="width: 100%; height: 100%; background: #000000;"></div>
     <script type="text/javascript">
         //Creating the Map
-        var map = L.map('map').setView([80.978522, -76.464844], 6);
-
         var map = L.map('map', {
+            crs: L.CRS.Simple,
             center: [80.978522, -76.464844],
             zoom: 6,
-            crs: L.CRS.Simple
+            minZoom: 5,
+            maxZoom: 7,
         });
 
+        // at max zoom (z=7): 60*34 @ 256px
+        var maxZoom = 7;
+        var tileSize = 256;
+        var sw = map.unproject([0, 34 * tileSize], maxZoom);
+        var ne = map.unproject([60 * tileSize, 0], maxZoom);
+        var bounds = L.latLngBounds(sw, ne);
+
         let layer = L.tileLayer('images/mapv4/{z}/{x}/{y}.png', {
-            continuousWorld: false,
             noWrap: true,
+            bounds: bounds,
             minZoom: 5,
             maxZoom: 7,
         });
         layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
         layer.addTo(map);
+
+        map.setMaxBounds(bounds);
+        map.fitBounds(bounds);
 
         //Coordinate Finder
         var marker = L.marker([80.909352, -75.344238], {
