@@ -40,7 +40,7 @@
         map.fitBounds(bounds);
 
         //Coordinate Finder
-        var marker = L.marker([1, -1], {
+        var marker = L.marker([-10, 10], {
             draggable: true,
         }).addTo(map);
         marker.bindPopup('LatLng Marker').openPopup();
