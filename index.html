@@ -15,7 +15,7 @@
         var map = L.map('map', {
             crs: L.CRS.Simple,
             center: [-12.273573, 36.812446],
-            zoom: 5,
+            zoom: 7,
             minZoom: 5,
             maxZoom: 8,
         });
@@ -34,6 +34,8 @@
         });
         layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
         layer.addTo(map);
+
+        // map.setZoom(7)
 
         // map.setMaxBounds(bounds);
         // map.fitBounds(bounds);
