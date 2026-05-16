@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html=style="height: 100%;">
+<html style="height: 100%;">
 
 <head>
     <title>Nuradan World Map</title>
@@ -14,20 +14,21 @@
         //Creating the Map
         var map = L.map('map').setView([0, 0], 6);
 
-        L.tileLayer('images/mapv2/{z}/{x}/{y}.png', {
-            // noWrap: true,
-            minZoom: 6,
-            maxZoom: 6,
+        L.tileLayer('images/mapv1/{z}/{x}/{y}.png', {
+            continuousWorld: false,
+            noWrap: true,
+            minZoom: 5,
+            maxZoom: 7,
         }).addTo(map);
 
         //Coordinate Finder
-        // var marker = L.marker([0, 0], {
-        //     draggable: true,
-        // }).addTo(map);
-        // marker.bindPopup('LatLng Marker').openPopup();
-        // marker.on('dragend', function (e) {
-        //     marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
-        // });
+        var marker = L.marker([0, 0], {
+            draggable: true,
+        }).addTo(map);
+        marker.bindPopup('LatLng Marker').openPopup();
+        marker.on('dragend', function (e) {
+            marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
+        });
 
         //Markers
     </script>
