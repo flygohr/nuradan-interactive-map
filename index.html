@@ -32,6 +32,7 @@
             bounds: bounds,
             minZoom: 5,
             maxZoom: 8,
+            attribution: '&copy; <a href="https://nuradan.flygohr.com">Nuradan Project</a>'
         });
         layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
         layer.addTo(map);
