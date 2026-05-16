@@ -35,12 +35,12 @@
         layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
         layer.addTo(map);
 
-        var imageOverlay = L.imageOverlay('images/NuradanWholeZONES.png', bounds, {
+        // var imageOverlay = L.imageOverlay('images/NuradanWholeZONES.png', bounds, {
           // opacity: 0.8,
           // errorOverlayUrl: errorOverlayUrl,
           // alt: altText,
           // interactive: true
-        }).addTo(map);
+        // }).addTo(map);
 
         map.setMaxBounds(bounds);
         // map.fitBounds(bounds);
