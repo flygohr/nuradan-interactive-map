@@ -15,8 +15,8 @@
         var map = L.map('map', {
             crs: L.CRS.Simple,
             center: [-24.546946, 73.640591],
-            zoom: 6,
-            minZoom: 3,
+            zoom: 7,
+            minZoom: 5,
             maxZoom: 8,
         });
 
@@ -30,7 +30,7 @@
         let layer = L.tileLayer('images/mapv5/{z}/{x}/{y}.png', {
             noWrap: true,
             bounds: bounds,
-            minZoom: 3,
+            minZoom: 5,
             maxZoom: 8,
         });
         layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
