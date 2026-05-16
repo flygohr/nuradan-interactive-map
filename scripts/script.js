@@ -1,4 +1,4 @@
-var map = L.map('map').setView(center, 5);
+var map = L.map('map').setView([0, 0], 5);
 
 L.tileLayer('../images/mapv1/{z}/{x}/{y}.png', {
     minZoom: 5,
