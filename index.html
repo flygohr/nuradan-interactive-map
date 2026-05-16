@@ -29,7 +29,7 @@
 
         let layer = L.tileLayer('images/mapv1/{z}/{x}/{y}.png', {
             noWrap: true,
-            bounds: bounds,
+            // bounds: bounds,
             attribution: '&copy; <a href="https://nuradan.flygohr.com">Nuradan Project</a>'
         });
         layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
