@@ -14,6 +14,12 @@
         //Creating the Map
         var map = L.map('map').setView([80.978522, -76.464844], 6);
 
+        var map = L.map('map', {
+            center: [80.978522, -76.464844],
+            zoom: 6,
+            crs: L.CRS.Simple
+        });
+
         let layer = L.tileLayer('images/mapv4/{z}/{x}/{y}.png', {
             continuousWorld: false,
             noWrap: true,
