@@ -12,7 +12,7 @@
     <div id="map" style="width: 100%; height: 100%; background: #000000;"></div>
     <script type="text/javascript">
         //Creating the Map
-        var map = L.map('map').setView([0, 0], 6);
+        var map = L.map('map').setView([73.60086, 27.089459], 6);
 
         L.tileLayer('images/mapv2/{z}/{x}/{y}.png', {
             continuousWorld: false,
@@ -22,7 +22,7 @@
         }).addTo(map);
 
         //Coordinate Finder
-        var marker = L.marker([0, 0], {
+        var marker = L.marker([73.294217, 29.769844], {
             draggable: true,
         }).addTo(map);
         marker.bindPopup('LatLng Marker').openPopup();
@@ -31,6 +31,7 @@
         });
 
         //Markers
+        var mts_sund = L.marker([73.60086, 27.089459]).bindPopup('<b>Sund</b>').addTo(map);
     </script>
 </body>
 
