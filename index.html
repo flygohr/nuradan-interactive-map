@@ -14,12 +14,14 @@
         //Creating the Map
         var map = L.map('map').setView([73.60086, 27.089459], 6);
 
-        L.tileLayer('images/mapv3/{z}/{x}/{y}.png', {
+        let layer = L.tileLayer('images/mapv3/{z}/{x}/{y}.png', {
             continuousWorld: false,
             noWrap: true,
             minZoom: 5,
             maxZoom: 7,
-        }).addTo(map);
+        });
+        layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
+        layer.addTo(map);
 
         //Coordinate Finder
         var marker = L.marker([73.294217, 29.769844], {
