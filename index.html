@@ -14,7 +14,7 @@
         //Creating the Map
         var map = L.map('map', {
             crs: L.CRS.Simple,
-            center: [-24.546946, 73.640591],
+            center: [-12.273573, 36.812446],
             zoom: 7,
             minZoom: 5,
             maxZoom: 8,
@@ -40,7 +40,7 @@
         map.fitBounds(bounds);
 
         //Coordinate Finder
-        var marker = L.marker([-20, 20], {
+        var marker = L.marker([-12.679715, 37.128835], {
             draggable: true,
         }).addTo(map);
         marker.bindPopup('LatLng Marker').openPopup();
@@ -49,7 +49,7 @@
         });
 
         //Markers
-        var mts_sund = L.marker([-24.546946, 73.640591]).bindPopup('<b>Sund</b>').addTo(map);
+        var mts_sund = L.marker([-12.273573, 36.812446]).bindPopup('<b>Sund</b>').addTo(map);
     </script>
 </body>
 
