@@ -13,8 +13,12 @@
     <script type="text/javascript">
         //Creating the Map
         var map = L.map('map', {
-            crs: L.CRS.Simple
-        }).setView([-12.273573, 36.812446],5).setZoom(5);
+            crs: L.CRS.Simple,
+            center: [-12.273573, 36.812446],
+            zoom: 5,
+            minZoom: 5,
+            maxZoom: 8,
+        });
 
         // at max zoom (z=8): 60*34 @ 256px
         var maxZoom = 8;
@@ -26,15 +30,13 @@
         let layer = L.tileLayer('images/mapv1/{z}/{x}/{y}.png', {
             noWrap: true,
             bounds: bounds,
-            minZoom: 5,
-            maxZoom: 8,
             attribution: '&copy; <a href="https://nuradan.flygohr.com">Nuradan Project</a>'
         });
         layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
         layer.addTo(map);
 
         map.setMaxBounds(bounds);
-        map.fitBounds(bounds);
+        // map.fitBounds(bounds);
 
         //Coordinate Finder
         var marker = L.marker([-12.679715, 37.128835], {
