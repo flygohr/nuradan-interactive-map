@@ -16,8 +16,6 @@
             crs: L.CRS.Simple,
             center: [-12.273573, 36.812446],
             zoom: 7,
-            minZoom: 5,
-            maxZoom: 8,
         });
 
         // at max zoom (z=8): 60*34 @ 256px
@@ -28,6 +26,10 @@
         var bounds = L.latLngBounds(sw, ne);
 
         let layer = L.tileLayer('images/mapv1/{z}/{x}/{y}.png', {
+            maxNativeZoom: 8,
+            minNativeZoom: 5,
+            minZoom: 3,
+            maxZoom: 10,
             noWrap: true,
             bounds: bounds,
             attribution: '&copy; <a href="https://nuradan.flygohr.com">Nuradan Project</a>'
