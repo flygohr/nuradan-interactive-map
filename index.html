@@ -46,8 +46,14 @@
             noWrap: true,
             bounds: bounds,
         })
-    
-        var layerControl = L.control.addOverlay(zones_overlay, "Zone boundaries").addTo(map);
+        zones_overlay.addTo(map);
+        
+        var baseMaps = {
+            "Base": layer
+        };
+        
+        var layerControl = L.control.layers(baseMaps).addTo(map);
+        layerControl.addOverlay(zones_overlay, "Zone boundaries")
         
         map.setMaxBounds(bounds);
         // map.fitBounds(bounds);
