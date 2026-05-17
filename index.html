@@ -41,7 +41,7 @@
         let zones_overlay = L.tileLayer('images/zones/{z}/{x}/{y}.png', {
             maxNativeZoom: 8,
             minNativeZoom: 5,
-            minZoom: 4,
+            minZoom: 6,
             maxZoom: 9,
             noWrap: true,
             bounds: bounds,
@@ -50,19 +50,11 @@
         
         var baseMaps = {
             "Base": layer,
-            "Zones boundaries": zones_overlay
+            "Zones boundaries": [layer, zones_overlay]
         };
         
         var layerControl = L.control.layers(baseMaps).addTo(map);
-
-        // TODO: generate tiles with gdal for roads (incl. bridges), and for zones boundaries, and add them as layers (not overlays)
-        // var imageOverlay = L.imageOverlay('images/NuradanWholeZONES.png', bounds, {
-          // opacity: 0.8,
-          // errorOverlayUrl: errorOverlayUrl,
-          // alt: altText,
-          // interactive: true
-        // }).addTo(map);
-
+        
         map.setMaxBounds(bounds);
         // map.fitBounds(bounds);
 
