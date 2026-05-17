@@ -51,13 +51,13 @@
         var marker = L.marker([-12.679715, 37.128835], {
             draggable: true,
         }).addTo(map);
-        marker.bindPopup('LatLng Marker').openPopup();
+        marker.bindPopup('LatLng finder').openPopup();
         marker.on('dragend', function (e) {
             marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
         });
 
         //Markers
-        var mts_sund = L.marker([-12.273573, 36.812446]).bindPopup('<b><a href="/Sund" target="_top">Sund</a></b>').addTo(map);
+        var mts_sund = L.marker([-12.273573, 36.812446]).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>').addTo(map);
     </script>
 </body>
 
