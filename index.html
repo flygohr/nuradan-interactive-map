@@ -19,13 +19,14 @@
         });
 
         // at max zoom (z=8): 60*34 @ 256px
+        // later it will be 78*44 @ 256px
         var maxZoom = 8;
         var tileSize = 256;
-        var sw = map.unproject([0, 34 * tileSize], maxZoom);
-        var ne = map.unproject([60 * tileSize, 0], maxZoom);
+        var sw = map.unproject([0, 44 * tileSize], maxZoom);
+        var ne = map.unproject([78 * tileSize, 0], maxZoom);
         var bounds = L.latLngBounds(sw, ne);
 
-        let layer = L.tileLayer('images/mapv1/{z}/{x}/{y}.png', {
+        let layer = L.tileLayer('images/full/{z}/{x}/{y}.png', {
             maxNativeZoom: 8,
             minNativeZoom: 5,
             minZoom: 4,
