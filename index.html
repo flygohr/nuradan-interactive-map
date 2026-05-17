@@ -37,6 +37,7 @@
         layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
         layer.addTo(map);
 
+        // TODO: generate tiles with gdal for roads (incl. bridges), and for zones boundaries, and add them as layers (not overlays)
         // var imageOverlay = L.imageOverlay('images/NuradanWholeZONES.png', bounds, {
           // opacity: 0.8,
           // errorOverlayUrl: errorOverlayUrl,
@@ -57,6 +58,8 @@
         });
 
         //Markers
+        // TODO: read from a CSV and produce a marker for each line
+        // TODO: export icons for cities, castles, ruins, towns, etc to use with markers 
         var mts_sund = L.marker([-12.273573, 36.812446]).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>').addTo(map);
     </script>
 </body>
