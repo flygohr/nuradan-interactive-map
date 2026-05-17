@@ -35,8 +35,18 @@
             bounds: bounds,
             attribution: '&copy; <a href="https://nuradan.flygohr.com" target="_top">Nuradan Project</a>'
         });
-        layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
+        // layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
         layer.addTo(map);
+        
+        let zones_overlay = L.tileLayer('images/zones/{z}/{x}/{y}.png', {
+            maxNativeZoom: 8,
+            minNativeZoom: 5,
+            minZoom: 4,
+            maxZoom: 9,
+            noWrap: true,
+            bounds: bounds,
+        })
+        zones_overlay.addTo(map);
 
         // TODO: generate tiles with gdal for roads (incl. bridges), and for zones boundaries, and add them as layers (not overlays)
         // var imageOverlay = L.imageOverlay('images/NuradanWholeZONES.png', bounds, {
