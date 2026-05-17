@@ -26,7 +26,7 @@
         var ne = map.unproject([78 * tileSize, 0], maxZoom);
         var bounds = L.latLngBounds(sw, ne);
 
-        let layer = L.tileLayer('images/full/{z}/{x}/{y}.png', {
+        let base = L.tileLayer('images/base/{z}/{x}/{y}.png', {
             maxNativeZoom: 8,
             minNativeZoom: 5,
             minZoom: 4,
@@ -36,7 +36,24 @@
             attribution: '&copy; <a href="https://nuradan.flygohr.com" target="_top">Nuradan Project</a>'
         });
         // layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
-        layer.addTo(map);
+        
+        let roads = L.tileLayer('images/roads/{z}/{x}/{y}.png', {
+            maxNativeZoom: 8,
+            minNativeZoom: 5,
+            minZoom: 4,
+            maxZoom: 9,
+            noWrap: true,
+            bounds: bounds,
+        });
+        
+        let pop = L.tileLayer('images/pop/{z}/{x}/{y}.png', {
+            maxNativeZoom: 8,
+            minNativeZoom: 5,
+            minZoom: 4,
+            maxZoom: 9,
+            noWrap: true,
+            bounds: bounds,
+        });
         
         let zones_overlay = L.tileLayer('images/zones/{z}/{x}/{y}.png', {
             maxNativeZoom: 8,
@@ -47,7 +64,13 @@
             bounds: bounds,
         })
         
+        base.addTo(map);
+        roads.addTo(map);
+        pop.addTo(map)
+        
         var layerControl = L.control.layers(null, null).addTo(map);
+        layerControl.addOverlay(roads, "Roads and bridges")
+        layerControl.addOverlay(pop, "Settlements")
         layerControl.addOverlay(zones_overlay, "Zone boundaries")
         
         map.setMaxBounds(bounds);
