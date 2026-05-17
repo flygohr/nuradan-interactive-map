@@ -26,6 +26,8 @@
         var ne = map.unproject([78 * tileSize, 0], maxZoom);
         var bounds = L.latLngBounds(sw, ne);
 
+        // gdal raster tile --webviewer leaflet --tiling-scheme raster --tile-size 256 --min-zoom=5 --max-zoom=8 map.png layer_folder
+
         let base = L.tileLayer('images/base/{z}/{x}/{y}.png', {
             maxNativeZoom: 8,
             minNativeZoom: 5,
@@ -40,7 +42,7 @@
         let roads = L.tileLayer('images/roads/{z}/{x}/{y}.png', {
             maxNativeZoom: 8,
             minNativeZoom: 5,
-            minZoom: 4,
+            minZoom: 6,
             maxZoom: 9,
             noWrap: true,
             bounds: bounds,
