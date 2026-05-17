@@ -14,7 +14,7 @@
         //Creating the Map
         var map = L.map('map', {
             crs: L.CRS.Simple,
-            center: [-12.273573, 36.812446],
+            center: [-15.856962, 47.862135],
             zoom: 7,
         });
 
@@ -33,7 +33,7 @@
             maxZoom: 9,
             noWrap: true,
             bounds: bounds,
-            attribution: '&copy; <a href="https://nuradan.flygohr.com">Nuradan Project</a>'
+            attribution: '&copy; <a href="https://nuradan.flygohr.com" target="_top">Nuradan Project</a>'
         });
         layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
         layer.addTo(map);
@@ -50,7 +50,7 @@
         // map.fitBounds(bounds);
 
         //Coordinate Finder
-        var marker = L.marker([-12.679715, 37.128835], {
+        var marker = L.marker([-16.320367, 48.311807], {
             draggable: true,
         }).addTo(map);
         marker.bindPopup('LatLng finder').openPopup();
@@ -61,7 +61,7 @@
         //Markers
         // TODO: read from a CSV and produce a marker for each line
         // TODO: export icons for cities, castles, ruins, towns, etc to use with markers 
-        var mts_sund = L.marker([-12.273573, 36.812446]).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>').addTo(map);
+        var mts_sund = L.marker([-15.856962, 47.862135]).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>').addTo(map);
     </script>
 </body>
 
