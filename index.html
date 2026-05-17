@@ -47,6 +47,13 @@
             bounds: bounds,
         })
         zones_overlay.addTo(map);
+        
+        var baseMaps = {
+            "Base": layer,
+            "Zones boundaries": zones_overlay
+        };
+        
+        var layerControl = L.control.layers(baseMaps).addTo(map);
 
         // TODO: generate tiles with gdal for roads (incl. bridges), and for zones boundaries, and add them as layers (not overlays)
         // var imageOverlay = L.imageOverlay('images/NuradanWholeZONES.png', bounds, {
