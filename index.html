@@ -70,7 +70,11 @@
         roads.addTo(map);
         pop.addTo(map)
 
-        L.rectangle([[-15.90625, 47.771484], [-16.394531, 48.097656]], {color: "#ff7800", weight: 1}).addTo(map);
+        var sund_slope = L.rectangle([[-15.90625, 47.771484], [-16.394531, 48.097656]], {color: "#ff7800", weight: 1})
+        sund_slope.bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>');
+        sund_slope.addTo(map)
+
+
 
         // var zones_data = {"type":"FeatureCollection","features":[{"type":"Feature","id":"01","properties":{"name":"Alabama","density":94.65},"geometry":{"type":"Rectangle","coordinates":[[-15.90625, 47.771484], [-16.394531, 48.097656]]}},]}
 
