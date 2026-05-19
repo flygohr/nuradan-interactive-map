@@ -70,12 +70,11 @@
         roads.addTo(map);
         pop.addTo(map)
 
-        // var rect_bounds = [[-15.90625, 47.771484], [-16.394531, 48.097656]];
-        // L.rectangle(rect_bounds, {color: "#ff7800", weight: 1}).addTo(map);
+        L.rectangle([[-15.90625, 47.771484], [-16.394531, 48.097656]], {color: "#ff7800", weight: 1}).addTo(map);
 
-        var zones_data = {"type":"FeatureCollection","features":[{"type":"Feature","id":"01","properties":{"name":"Alabama","density":94.65},"geometry":{"type":"Rectangle","coordinates":[[-15.90625, 47.771484], [-16.394531, 48.097656]]}},]}
+        // var zones_data = {"type":"FeatureCollection","features":[{"type":"Feature","id":"01","properties":{"name":"Alabama","density":94.65},"geometry":{"type":"Rectangle","coordinates":[[-15.90625, 47.771484], [-16.394531, 48.097656]]}},]}
 
-        L.geoJson(zones_data).addTo(map);
+        // L.geoJson(zones_data).addTo(map);
         
         var layerControl = L.control.layers(null, null).addTo(map);
         layerControl.addOverlay(roads, "Roads and bridges")
