@@ -57,14 +57,14 @@
             bounds: bounds,
         });
         
-        let zones_overlay = L.tileLayer('images/zones/{z}/{x}/{y}.png', {
-            maxNativeZoom: 8,
-            minNativeZoom: 5,
-            minZoom: 6,
-            maxZoom: 9,
-            noWrap: true,
-            bounds: bounds,
-        })
+        // let zones_overlay = L.tileLayer('images/zones/{z}/{x}/{y}.png', {
+        //     maxNativeZoom: 8,
+        //     minNativeZoom: 5,
+        //     minZoom: 6,
+        //     maxZoom: 9,
+        //     noWrap: true,
+        //     bounds: bounds,
+        // })
         
         base.addTo(map);
         roads.addTo(map);
@@ -72,18 +72,13 @@
 
         var sund_slope = L.rectangle([[-15.90625, 47.771484], [-16.394531, 48.097656]], {color: "#ffffffcc", weight: 1})
         sund_slope.bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund-Slope" target="_top">Sund Slope</a></b>');
-        sund_slope.addTo(map)
 
-
-
-        // var zones_data = {"type":"FeatureCollection","features":[{"type":"Feature","id":"01","properties":{"name":"Alabama","density":94.65},"geometry":{"type":"Rectangle","coordinates":[[-15.90625, 47.771484], [-16.394531, 48.097656]]}},]}
-
-        // L.geoJson(zones_data).addTo(map);
+        var zone_boundaries = layerGroup([sund_slope])
         
         var layerControl = L.control.layers(null, null).addTo(map);
         layerControl.addOverlay(roads, "Roads and bridges")
         layerControl.addOverlay(pop, "Settlements")
-        layerControl.addOverlay(zones_overlay, "Zone boundaries")
+        layerControl.addOverlay(zone_boundaries, "Zones")
         
         map.setMaxBounds(bounds);
         // map.fitBounds(bounds);
