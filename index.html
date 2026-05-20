@@ -31,37 +31,6 @@
         var gridW = (tileSize*tilesW)/gridSize;
         var gridH = (tileSize*tilesH)/gridSize;
         var gridSizeCRS = tilesW/gridW;
-        
-        Papa.parse("https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=0&single=true&output=csv", {
-            download: true,
-            header: true,
-            complete: function(results) {
-                console.log(results);
-                createZones(results);
-            }
-        })
-
-        let zonesRectangles = []
-
-        function createZones(zonesData) {
-            for(i = 0; i < zonesData.length; i++) {
-                var zone = L.rectangle([
-                    [gridSizeCRS*zonesMapData[i].y, gridSizeCRS*zonesMapData[i].x],
-                    [gridSizeCRS*(zonesMapData[i].y+zonesMapData[i].height), gridSizeCRS*(zonesMapData[i].x+zonesMapData[i].width)]
-                ],
-                {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
-
-                zone.bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund-Slope" target="_top">Sund Slope</a></b>')
-
-                zonesRectangles.push(zone)
-            };
-            console.log(zonesRectangles)
-            layerControl.addOverlay(zone_boundaries, "Zones")
-        }
-
-        // TODO: add hover effects
-
-        var zone_boundaries = L.layerGroup(zonesRectangles)
 
         console.log(gridSizeCRS) // 0.125
 
@@ -129,6 +98,42 @@
         layerControl.addOverlay(pop, "Settlements")
         layerControl.addOverlay(zones_overlay, "Zone boundaries")
         layerControl.addOverlay(coordinatesGridGroup, "Coordinates grid")
+
+        // PARSE ZONES DATA AND CREATE RECTANGLES
+
+        Papa.parse("https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=0&single=true&output=csv", {
+            download: true,
+            header: true,
+            complete: function(results) {
+                console.log(results);
+                createZones(results);
+            }
+        })
+
+        let zonesRectangles = []
+
+        function createZones(zonesData) {
+            for(i = 0; i < zonesData.length; i++) {
+                var zone = L.rectangle([
+                    [gridSizeCRS*zonesMapData[i].y, gridSizeCRS*zonesMapData[i].x],
+                    [gridSizeCRS*(zonesMapData[i].y+zonesMapData[i].height), gridSizeCRS*(zonesMapData[i].x+zonesMapData[i].width)]
+                ],
+                {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
+
+                zone.bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund-Slope" target="_top">Sund Slope</a></b>')
+
+                zonesRectangles.push(zone)
+            };
+            console.log(zonesRectangles)
+            let zone_boundaries = L.layerGroup(zonesRectangles)
+            layerControl.addOverlay(zone_boundaries, "Zones")
+        }
+
+        // TODO: add hover effects
+
+        
+
+
         
         map.setMaxBounds(bounds);
         // map.fitBounds(bounds);
