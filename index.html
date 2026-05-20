@@ -87,12 +87,12 @@
         // TODO: for loop with lines that go across the whole map, h and v
         for(i = 0; i < gridW; i++) {
             let line = L.polyline([[0, i*gridSizeCRS], [-gridSizeCRS*gridH, i*gridSizeCRS]], {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
-            coordinatesGrid.push(line)
+            coordinatesGridLines.push(line)
         }
 
         for(i = 0; i < gridH; i++) {
             let line = L.polyline([[i*gridSizeCRS, 0], [i*gridSizeCRS, gridSizeCRS*gridW]], {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
-            coordinatesGrid.push(line)
+            coordinatesGridLines.push(line)
         }
 
         let coordinatesGridGroup = L.layerGroup(coordinatesGridLines)
