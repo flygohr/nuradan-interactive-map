@@ -26,7 +26,7 @@
         var ne = map.unproject([tilesW * tileSize, 0], maxZoom);
         var bounds = L.latLngBounds(sw, ne);
 
-        var gridSize = tileSize/6;
+        var gridSize = tileSize/8;
         var gridW = (tileSize*tilesW)/gridSize;
         var gridH = (tileSize*tilesH)/gridSize;
         var gridSizeCRS = tilesW/gridW;
