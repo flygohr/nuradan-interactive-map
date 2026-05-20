@@ -79,13 +79,9 @@
         var sund_slope = L.rectangle([[-gridSizeCRS*128, gridSizeCRS*382], [-gridSizeCRS*131, gridSizeCRS*384]], {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
         sund_slope.bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund-Slope" target="_top">Sund Slope</a></b>');
 
-        // TODO: add hovering styles
+        // TODO: add hover effects
 
         var zone_boundaries = L.layerGroup([sund_slope])
-        zone_boundaries.on({
-            mouseover: setStyle({weight: 2, opacity: 0.8, fillOpacity: 0.4}),
-            mouseout: setStyle({weight: 1, opacity: 0.6, fillOpacity: 0.2})
-        })
         
         var layerControl = L.control.layers(null, null).addTo(map);
         layerControl.addOverlay(roads, "Roads and bridges")
