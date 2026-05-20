@@ -32,13 +32,34 @@
         var gridH = (tileSize*tilesH)/gridSize;
         var gridSizeCRS = tilesW/gridW;
 
-        let zonesMapData = Papa.parse("https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=0&single=true&output=csv", {
+        let zonesMapData
+        
+        Papa.parse("https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=0&single=true&output=csv", {
             download: true,
             header: true,
             complete: function(results) {
                 console.log(results);
+                zonesMapData = results;
             }
         })
+
+        let zonesRectangles = []
+
+        for(i = 0; i < Object.keys(zonesMapData.data).length; i++) {
+            var zone = L.rectangle([
+                [gridSizeCRS*zonesMapData.data[i].y, gridSizeCRS*zonesMapData.data[i].x],
+                [gridSizeCRS*(zonesMapData.data[i].y+zonesMapData.data[i].height), gridSizeCRS*(zonesMapData.data[i].x+zonesMapData.data[i].width)]
+            ],
+            {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
+
+            zone.bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund-Slope" target="_top">Sund Slope</a></b>')
+
+            zonesRectangles.push(zone)
+        };
+
+        // TODO: add hover effects
+
+        var zone_boundaries = L.layerGroup(zonesRectangles)
 
         console.log(gridSizeCRS) // 0.125
 
@@ -85,13 +106,6 @@
         // roads.addTo(map);
         pop.addTo(map)
 
-        // coords are y, x
-        var sund_slope = L.rectangle([[-gridSizeCRS*131, gridSizeCRS*377], [-gridSizeCRS*134, gridSizeCRS*379]], {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
-        sund_slope.bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund-Slope" target="_top">Sund Slope</a></b>');
-
-        // TODO: add hover effects
-
-        var zone_boundaries = L.layerGroup([sund_slope])
     
         let coordinatesGridLines = []
         // TODO: for loop with lines that go across the whole map, h and v
