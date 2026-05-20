@@ -32,8 +32,12 @@
         var gridH = (tileSize*tilesH)/gridSize;
         var gridSizeCRS = tilesW/gridW;
 
-        let zonesMapData = Papa.parse("https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=0&single=true&output=csv", {download: true})
-        console.log(zonesMapData)
+        let zonesMapData = Papa.parse("https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=0&single=true&output=csv", {
+            download: true,
+            complete: function(results) {
+                console.log(results);
+            }
+        })
 
         console.log(gridSizeCRS) // 0.125
 
