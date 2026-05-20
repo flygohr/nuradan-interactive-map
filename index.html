@@ -114,10 +114,13 @@
         }).addTo(map);
         marker.bindPopup('LatLng finder').openPopup();
         marker.on('dragend', function (e) {
-            var latLngCell = marker.getLatLng().lat
+            let cellLat = marker.getLatLng().lat/gridSizeCRS
+            let cellLng = marker.getLatLng().lng/gridSizeCRS
+            let preciseCoords = marker.getLatLng().toString()
+            let popupString = cellLat + ", " + cellLng + "<br />" + preciseCoords
             // TODO: display both coords AND cell y,x for easier mapping
             console.log(latLngCell)
-            marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
+            marker.getPopup().setContent(popupString).openOn(map);
         });
 
         //Markers
