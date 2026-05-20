@@ -82,13 +82,11 @@
         // TODO: add hover effects
 
         var zone_boundaries = L.layerGroup([sund_slope])
-        
-
-
+    
 
         // TODO: for loop with lines that go across the whole map, h and v
         for(i = 0; i < tilesW; i++) {
-            let line = L.polyline([[0, i*gridSizeCRS], [gridSizeCRS*tilesH, i*gridSizeCRS]]).addTo(map)
+            let line = L.polyline([[0, i*gridSizeCRS], [-gridSizeCRS*tilesH*8, i*gridSizeCRS]]).addTo(map)
         }
 
 
