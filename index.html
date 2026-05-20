@@ -116,8 +116,8 @@
 
             for(i = 0; i < zonesData.data.length; i++) {
                 var zone = L.rectangle([
-                    [gridSizeCRS*zonesData.data[i].y, gridSizeCRS*zonesData.data[i].x],
-                    [gridSizeCRS*(zonesData.data[i].y-zonesData.data[i].height), gridSizeCRS*(zonesData.data[i].x+zonesData.data[i].width)]
+                    [gridSizeCRS * zonesData.data[i].y, gridSizeCRS * zonesData.data[i].x],
+                    [gridSizeCRS * (zonesData.data[i].y - zonesData.data[i].height), gridSizeCRS * (zonesData.data[i].x + zonesData.data[i].width)]
                 ],
                 {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
 
