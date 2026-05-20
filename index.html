@@ -26,11 +26,11 @@
         var ne = map.unproject([tilesW * tileSize, 0], maxZoom);
         var bounds = L.latLngBounds(sw, ne);
 
-        var gridSize = tileSize/8;
+        var gridSize = tileSize/6;
         var gridW = (tileSize*tilesW)/gridSize;
         var gridH = (tileSize*tilesH)/gridSize;
         var gridSizeCRS = tilesW/gridW;
-        // console.log(gridSizeCRS) 0.125
+        console.log(gridSizeCRS) // 0.125
 
         // gdal raster tile --webviewer leaflet --tiling-scheme raster --tile-size 256 --min-zoom=5 --max-zoom=8 map.png layer_folder
 
