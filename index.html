@@ -98,7 +98,7 @@
         }).addTo(map);
         marker.bindPopup('LatLng finder').openPopup();
         marker.on('dragend', function (e) {
-            var latLngCell = marker.getLatLng()
+            var latLngCell = marker.getLatLng().lat
             console.log(latLngCell)
             marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
         });
@@ -106,7 +106,7 @@
         //Markers
         // TODO: read from a CSV and produce a marker for each line
         // TODO: export icons for cities, castles, ruins, towns, etc to use with markers 
-        var mts_sund = L.marker(-gridSizeCRS*130.5, gridSizeCRS*377.5).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>').addTo(map);
+        var mts_sund = L.marker([-gridSizeCRS*130.5, gridSizeCRS*377.5]).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>').addTo(map);
     </script>
 </body>
 
