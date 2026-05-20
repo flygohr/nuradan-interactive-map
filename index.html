@@ -99,6 +99,8 @@
         marker.bindPopup('LatLng finder').openPopup();
         marker.on('dragend', function (e) {
             var latLngCell = marker.getLatLng().lat
+            // TODO: display both coords AND cell y,x for easier mapping
+            // TODO: for loop with lines that go across the whole map, h and v
             console.log(latLngCell)
             marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
         });
