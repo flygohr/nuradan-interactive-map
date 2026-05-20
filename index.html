@@ -114,8 +114,8 @@
         }).addTo(map);
         marker.bindPopup('LatLng finder').openPopup();
         marker.on('dragend', function (e) {
-            let cellLat = marker.getLatLng().lat/gridSizeCRS
-            let cellLng = marker.getLatLng().lng/gridSizeCRS
+            let cellLat = Math.trunc(marker.getLatLng().lat/gridSizeCRS)
+            let cellLng = Math.trunc(marker.getLatLng().lng/gridSizeCRS)
             let preciseCoords = marker.getLatLng().toString()
             let popupString = cellLat + ", " + cellLng + "<br />" + preciseCoords
             // TODO: display both coords AND cell y,x for easier mapping
