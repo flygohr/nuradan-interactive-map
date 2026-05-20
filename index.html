@@ -116,12 +116,13 @@
 
             for(i = 0; i < zonesData.data.length; i++) {
                 var zone = L.rectangle([
-                    [gridSizeCRS*zonesMapData[i].y, gridSizeCRS*zonesMapData[i].x],
-                    [gridSizeCRS*(zonesMapData[i].y+zonesMapData[i].height), gridSizeCRS*(zonesMapData[i].x+zonesMapData[i].width)]
+                    [gridSizeCRS*zonesData.data[i].y, gridSizeCRS*zonesData.data[i].x],
+                    [gridSizeCRS*(zonesData.data[i].y+zonesData.data[i].height), gridSizeCRS*(zonesData.data[i].x+zonesData.data[i].width)]
                 ],
                 {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
 
-                zone.bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund-Slope" target="_top">Sund Slope</a></b>')
+                let popupHTML = '<b><a href="' + zonesData.data[i].URL + '" target="_top">' + zonesData.data[i].name + '</a></b>'
+                zone.bindPopup(popupHTML)
 
                 zonesRectangles.push(zone)
             };
