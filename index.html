@@ -110,9 +110,10 @@
             }
         })
 
-        let zonesRectangles = []
-
         function createZones(zonesData) {
+
+            let zonesRectangles = []
+
             for(i = 0; i < zonesData.length; i++) {
                 var zone = L.rectangle([
                     [gridSizeCRS*zonesMapData[i].y, gridSizeCRS*zonesMapData[i].x],
@@ -124,17 +125,15 @@
 
                 zonesRectangles.push(zone)
             };
+
             console.log(zonesRectangles)
             let zone_boundaries = L.layerGroup(zonesRectangles)
             layerControl.addOverlay(zone_boundaries, "Zones")
+            
         }
 
         // TODO: add hover effects
-
-        
-
-
-        
+     
         map.setMaxBounds(bounds);
         // map.fitBounds(bounds);
 
