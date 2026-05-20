@@ -91,7 +91,7 @@
         }
 
         for(i = 0; i < gridH; i++) {
-            let line = L.polyline([[i*gridSizeCRS, 0], [i*gridSizeCRS, -gridSizeCRS*gridW]], {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
+            let line = L.polyline([[-i*gridSizeCRS, 0], [-i*gridSizeCRS, gridSizeCRS*gridW]], {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
             coordinatesGridLines.push(line)
         }
 
