@@ -86,7 +86,7 @@
 
         // TODO: for loop with lines that go across the whole map, h and v
         for(i = 0; i < tilesW; i++) {
-            let line = L.polyline([[0, i*gridSizeCRS], [-gridSizeCRS*tilesH*8, i*gridSizeCRS]]).addTo(map)
+            let line = L.polyline([[0, i*gridSizeCRS], [-gridSizeCRS*tilesH*8, i*gridSizeCRS]], {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2}).addTo(map)
         }
 
 
