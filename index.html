@@ -83,6 +83,15 @@
 
         var zone_boundaries = L.layerGroup([sund_slope])
         
+
+
+
+        // TODO: for loop with lines that go across the whole map, h and v
+        for(i = 0; i < tilesW; i++) {
+            let line = L.polyline([[0, i*gridSizeCRS], [gridSizeCRS*tilesH, i*gridSizeCRS]]).addTo(map)
+        }
+
+
         var layerControl = L.control.layers(null, null).addTo(map);
         // layerControl.addOverlay(roads, "Roads and bridges")
         layerControl.addOverlay(pop, "Settlements")
@@ -100,7 +109,6 @@
         marker.on('dragend', function (e) {
             var latLngCell = marker.getLatLng().lat
             // TODO: display both coords AND cell y,x for easier mapping
-            // TODO: for loop with lines that go across the whole map, h and v
             console.log(latLngCell)
             marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
         });
