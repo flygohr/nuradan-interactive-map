@@ -83,11 +83,19 @@
 
         var zone_boundaries = L.layerGroup([sund_slope])
     
-
+        let coordinatesGridLines = []
         // TODO: for loop with lines that go across the whole map, h and v
         for(i = 0; i < gridW; i++) {
-            let line = L.polyline([[0, i*gridSizeCRS], [-gridSizeCRS*gridH, i*gridSizeCRS]], {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2}).addTo(map)
+            let line = L.polyline([[0, i*gridSizeCRS], [-gridSizeCRS*gridH, i*gridSizeCRS]], {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
+            coordinatesGrid.push(line)
         }
+
+        for(i = 0; i < gridH; i++) {
+            let line = L.polyline([[i*gridSizeCRS, 0], [i*gridSizeCRS, gridSizeCRS*gridW]], {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
+            coordinatesGrid.push(line)
+        }
+
+        let coordinatesGridGroup = L.layerGroup(coordinatesGridLines)
 
 
         var layerControl = L.control.layers(null, null).addTo(map);
@@ -95,6 +103,7 @@
         layerControl.addOverlay(pop, "Settlements")
         layerControl.addOverlay(zones_overlay, "Zone boundaries")
         layerControl.addOverlay(zone_boundaries, "Zones")
+        layerControl.addOverlay(coordinatesGridGroup, "Coordinates grid")
         
         map.setMaxBounds(bounds);
         // map.fitBounds(bounds);
