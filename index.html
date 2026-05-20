@@ -18,13 +18,19 @@
             zoom: 7,
         });
 
-        // at max zoom (z=8): 60*34 @ 256px
-        // later it will be 78*44 @ 256px
-        var maxZoom = 8;
+        var tilesH = 44;
+        var tilesW = 78;
         var tileSize = 256;
-        var sw = map.unproject([0, 44 * tileSize], maxZoom);
-        var ne = map.unproject([78 * tileSize, 0], maxZoom);
+        var maxZoom = 8;
+        var sw = map.unproject([0, tilesH * tileSize], maxZoom);
+        var ne = map.unproject([tilesW * tileSize, 0], maxZoom);
         var bounds = L.latLngBounds(sw, ne);
+
+        var gridSize = tileSize/8;
+        var gridW = (tileSize*tilesW)/gridSize;
+        var gridH = (tileSize*tilesH)/gridSize;
+        var gridSizeCRS = tilesW/gridW;
+        console.log(gridSizeCRS)
 
         // gdal raster tile --webviewer leaflet --tiling-scheme raster --tile-size 256 --min-zoom=5 --max-zoom=8 map.png layer_folder
 
