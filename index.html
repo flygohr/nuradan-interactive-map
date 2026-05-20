@@ -45,10 +45,10 @@
 
         let zonesRectangles = []
 
-        for(i = 0; i < Object.keys(zonesMapData.data).length; i++) {
+        for(i = 0; i < Object.keys(zonesMapData).length; i++) {
             var zone = L.rectangle([
-                [gridSizeCRS*zonesMapData.data[i].y, gridSizeCRS*zonesMapData.data[i].x],
-                [gridSizeCRS*(zonesMapData.data[i].y+zonesMapData.data[i].height), gridSizeCRS*(zonesMapData.data[i].x+zonesMapData.data[i].width)]
+                [gridSizeCRS*zonesMapData[i].y, gridSizeCRS*zonesMapData[i].x],
+                [gridSizeCRS*(zonesMapData[i].y+zonesMapData[i].height), gridSizeCRS*(zonesMapData[i].x+zonesMapData[i].width)]
             ],
             {color: "#ffffff", weight: 1, opacity: 0.6, fillOpacity: 0.2})
 
