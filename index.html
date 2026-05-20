@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="leaflet/leaflet.css">
     <script src="leaflet/leaflet.js"></script>
+    <script src="papaparse/papaparse.js"></script>
 </head>
 
 <body style="height: 100%; margin: 0;">
@@ -31,6 +32,7 @@
         var gridH = (tileSize*tilesH)/gridSize;
         var gridSizeCRS = tilesW/gridW;
 
+        // https://medium.com/@ryan_forrester_/read-csv-files-in-javascript-how-to-guide-8d0ac6df082a
         async function fetchCSV(url) {
             try {
                 const response = await fetch(url);
@@ -41,7 +43,8 @@
             }
         }
 
-        let zonesMapData = fetchCSV('https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=0&single=true&output=csv');
+        let zonesMapCSV = fetchCSV('https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=0&single=true&output=csv');
+        let zonesMapData = Papa.parse(zonesMapCSV)
         console.log(zonesMapData)
 
         console.log(gridSizeCRS) // 0.125
