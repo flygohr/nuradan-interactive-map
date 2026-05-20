@@ -76,7 +76,7 @@
         pop.addTo(map)
 
         // coords are y, x
-        var sund_slope = L.rectangle([[-gridSizeCRS*128, gridSizeCRS*382], [-gridSizeCRS*131, gridSizeCRS*384]], {color: "#ffffffcc", weight: 1})
+        var sund_slope = L.rectangle([[-gridSizeCRS*128, gridSizeCRS*382], [-gridSizeCRS*131, gridSizeCRS*384]], {color: "#ffffff", weight: 2, opacity: 0.6, fillOpacity: 0.2})
         sund_slope.bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund-Slope" target="_top">Sund Slope</a></b>');
 
         var zone_boundaries = L.layerGroup([sund_slope])
