@@ -30,6 +30,20 @@
         var gridW = (tileSize*tilesW)/gridSize;
         var gridH = (tileSize*tilesH)/gridSize;
         var gridSizeCRS = tilesW/gridW;
+
+        async function fetchCSV(url) {
+            try {
+                const response = await fetch(url);
+                const data = await response.text();
+                document.getElementById('output').innerText = data;
+            } catch (error) {
+                console.error('Error fetching CSV:', error);
+            }
+        }
+
+        let zonesMapData = fetchCSV('https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=0&single=true&output=csv');
+        console.log(zonesMapData)
+
         console.log(gridSizeCRS) // 0.125
 
         // gdal raster tile --webviewer leaflet --tiling-scheme raster --tile-size 256 --min-zoom=5 --max-zoom=8 map.png layer_folder
