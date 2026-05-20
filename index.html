@@ -98,6 +98,8 @@
         }).addTo(map);
         marker.bindPopup('LatLng finder').openPopup();
         marker.on('dragend', function (e) {
+            var latLngCell = marker.getLatLng()
+            console.log(latLngCell)
             marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
         });
 
