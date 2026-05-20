@@ -114,6 +114,8 @@
 
             let zonesRectangles = []
 
+            console.log(zonesData.length)
+
             for(i = 0; i < zonesData.length; i++) {
                 var zone = L.rectangle([
                     [gridSizeCRS*zonesMapData[i].y, gridSizeCRS*zonesMapData[i].x],
@@ -129,7 +131,7 @@
             console.log(zonesRectangles)
             let zone_boundaries = L.layerGroup(zonesRectangles)
             layerControl.addOverlay(zone_boundaries, "Zones")
-            
+
         }
 
         // TODO: add hover effects
