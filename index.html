@@ -45,7 +45,7 @@
 
         let zonesRectangles = []
 
-        for(i = 0; i < Object.keys(zonesMapData).length; i++) {
+        for(i = 0; i < zonesMapData.length; i++) {
             var zone = L.rectangle([
                 [gridSizeCRS*zonesMapData[i].y, gridSizeCRS*zonesMapData[i].x],
                 [gridSizeCRS*(zonesMapData[i].y+zonesMapData[i].height), gridSizeCRS*(zonesMapData[i].x+zonesMapData[i].width)]
