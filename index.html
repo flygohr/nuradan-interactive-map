@@ -30,7 +30,7 @@
         var gridW = (tileSize*tilesW)/gridSize;
         var gridH = (tileSize*tilesH)/gridSize;
         var gridSizeCRS = tilesW/gridW;
-        console.log(gridSizeCRS)
+        // console.log(gridSizeCRS) 0.125
 
         // gdal raster tile --webviewer leaflet --tiling-scheme raster --tile-size 256 --min-zoom=5 --max-zoom=8 map.png layer_folder
 
@@ -43,7 +43,6 @@
             bounds: bounds,
             attribution: '&copy; <a href="https://nuradan.flygohr.com" target="_top">Nuradan Project</a>'
         });
-        // layer.on('tileloadstart', e => console.log(e.coords)); // {x, y, z}
         
         let roads = L.tileLayer('images/roads/{z}/{x}/{y}.png', {
             maxNativeZoom: 8,
@@ -76,7 +75,8 @@
         roads.addTo(map);
         pop.addTo(map)
 
-        var sund_slope = L.rectangle([[-15.90625, 47.771484], [-16.394531, 48.097656]], {color: "#ffffffcc", weight: 1})
+        // coords are y, x
+        var sund_slope = L.rectangle([[-gridSizeCRS*128, gridSizeCRS*382], [-gridSizeCRS*131, gridSizeCRS*384]], {color: "#ffffffcc", weight: 1})
         sund_slope.bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund-Slope" target="_top">Sund Slope</a></b>');
 
         var zone_boundaries = L.layerGroup([sund_slope])
