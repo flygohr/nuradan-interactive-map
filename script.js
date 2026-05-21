@@ -8,10 +8,12 @@ window.location.href.replace(
   },
 );
 
+// https://nuradan-interactive-map.vercel.app?lat=--16.417943&lng=47.050848&zoom=7
+
 let map = L.map("map", {
   crs: L.CRS.Simple,
   center: [params.lat || -22, params.lng || 39], // change it to receive URL parameters https://blog.mastermaps.com/2012/10/how-to-control-your-leaflet-map-with.html
-  zoom: 7,
+  zoom: params.zoom || 7,
 });
 
 let tilesH = 44;
