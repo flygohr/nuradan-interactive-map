@@ -129,7 +129,27 @@ marker.on('dragend', function (e) {
     marker.getPopup().setContent(popupString).openOn(map);
 });
 
+
+let NuradanIconSmall = L.Icon.extend({
+    options: {
+        shadowUrl: 'images/icons/64/shadow.png',
+        iconSize:     [32, 32],
+        shadowSize:   [32, 32],
+        iconAnchor:   [16, 16],
+        shadowAnchor: [0, 0],
+        popupAnchor:  [-16, -16]
+    }
+});
+
+let markerIcon = new NuradanIconSmall({iconUrl: 'images/icons/64/marker.png'}),
+    villageIcon = new NuradanIconSmall({iconUrl: 'images/icons/64/village.png'}),
+    encampmentIcon = new NuradanIconSmall({iconUrl: 'images/icons/64/encampment.png'});
+    dungeonIcon = new NuradanIconSmall({iconUrl: 'images/icons/64/dungeon.png'});
+    bridgeIconH = new NuradanIconSmall({iconUrl: 'images/icons/64/bridge_h.png'});
+    bridgeIconH = new NuradanIconSmall({iconUrl: 'images/icons/64/bridge_v.png'});
+    castleIcon = new NuradanIconSmall({iconUrl: 'images/icons/64/castle.png'});
+
 //Markers
 // TODO: export icons for cities, castles, ruins, towns, etc to use with markers 
 // https://leafletjs.com/examples/custom-icons/
-var mts_sund = L.marker([-gridSizeCRS*130.5, gridSizeCRS*377.5]).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>').addTo(map);
+var mts_sund = L.marker([-gridSizeCRS*130.5, gridSizeCRS*377.5], {icon: villageIcon}).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>').addTo(map);
