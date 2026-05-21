@@ -152,4 +152,17 @@ let markerIcon = new NuradanIconSmall({iconUrl: 'images/icons/64/marker.png'}),
 //Markers
 // TODO: export icons for cities, castles, ruins, towns, etc to use with markers 
 // https://leafletjs.com/examples/custom-icons/
-var mts_sund = L.marker([-gridSizeCRS*130.5, gridSizeCRS*377.5], {icon: villageIcon}).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>').addTo(map);
+var mts_sund = L.marker([-gridSizeCRS*130.5, gridSizeCRS*377.5], {icon: villageIcon}).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>');
+
+var settlementsGroup = L.layerGroup([mts_sund])
+settlementsGroup.addTo(map)
+layerControl.addOverlay(POIs, "Settlements")
+
+map.on('zoomend', function() {
+    if (map.getZoom() <7){
+            map.removeLayer(settlementsGroup);
+    }
+    else {
+            map.addLayer(settlementsGroup);
+        }
+});
