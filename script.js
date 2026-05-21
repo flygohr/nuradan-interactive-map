@@ -8,7 +8,7 @@ window.location.href.replace(
   },
 );
 
-// https://nuradan-interactive-map.vercel.app?lat=--16.417943&lng=47.050848&zoom=7
+// https://nuradan-interactive-map.vercel.app?lat=-16.417943&lng=47.050848&zoom=8
 
 let map = L.map("map", {
   crs: L.CRS.Simple,
@@ -180,7 +180,7 @@ let marker = L.marker([-16.320367, 48.311807], {
   icon: markerIcon,
   draggable: true,
 }).addTo(map);
-marker.bindPopup("Move to show coordinates").openPopup();
+// marker.bindPopup("Move to show coordinates").openPopup();
 marker.on("dragend", function (e) {
   let cellLat = Math.trunc(marker.getLatLng().lat / gridSizeCRS);
   let cellLng = Math.trunc(marker.getLatLng().lng / gridSizeCRS);
