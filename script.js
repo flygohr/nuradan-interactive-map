@@ -116,18 +116,7 @@ layerControl.addOverlay(coordinatesGridGroup, "Debug: coordinates grid")
 
 map.setMaxBounds(bounds);
 
-//Coordinate Finder
-var marker = L.marker([-16.320367, 48.311807], {
-    draggable: true,
-}).addTo(map);
-marker.bindPopup('Move to show coordinates').openPopup();
-marker.on('dragend', function (e) {
-    let cellLat = Math.trunc(marker.getLatLng().lat/gridSizeCRS)
-    let cellLng = Math.trunc(marker.getLatLng().lng/gridSizeCRS)
-    let preciseCoords = marker.getLatLng().toString()
-    let popupString = cellLat + ", " + cellLng + "<br />" + preciseCoords
-    marker.getPopup().setContent(popupString).openOn(map);
-});
+
 
 
 let NuradanIconSmall = L.Icon.extend({
@@ -136,8 +125,8 @@ let NuradanIconSmall = L.Icon.extend({
         iconSize:     [32, 32],
         shadowSize:   [32, 32],
         iconAnchor:   [16, 16],
-        shadowAnchor: [0, 0],
-        popupAnchor:  [-16, -16]
+        shadowAnchor: [16, 16],
+        popupAnchor:  [16, -16]
     }
 });
 
@@ -148,6 +137,20 @@ let markerIcon = new NuradanIconSmall({iconUrl: 'images/icons/64/marker.png'}),
     bridgeIconH = new NuradanIconSmall({iconUrl: 'images/icons/64/bridge_h.png'});
     bridgeIconH = new NuradanIconSmall({iconUrl: 'images/icons/64/bridge_v.png'});
     castleIcon = new NuradanIconSmall({iconUrl: 'images/icons/64/castle.png'});
+
+//Coordinate Finder
+let marker = L.marker([-16.320367, 48.311807], {
+    icon: markerIcon,
+    draggable: true,
+}).addTo(map);
+marker.bindPopup('Move to show coordinates').openPopup();
+marker.on('dragend', function (e) {
+    let cellLat = Math.trunc(marker.getLatLng().lat/gridSizeCRS)
+    let cellLng = Math.trunc(marker.getLatLng().lng/gridSizeCRS)
+    let preciseCoords = marker.getLatLng().toString()
+    let popupString = cellLat + ", " + cellLng + "<br />" + preciseCoords
+    marker.getPopup().setContent(popupString).openOn(map);
+});
 
 //Markers
 // TODO: export icons for cities, castles, ruins, towns, etc to use with markers 
