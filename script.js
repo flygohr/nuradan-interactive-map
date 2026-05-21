@@ -186,7 +186,7 @@ marker.on("dragend", function (e) {
   let cellLng = Math.trunc(marker.getLatLng().lng / gridSizeCRS);
   console.log(marker.getLatLng())
   let preciseCoords = marker.getLatLng().toString();
-  let popupString = cellLat + "<br />" + cellLng + "<br />" + preciseCoords;
+  let popupString = cellLat + "<br />" + cellLng + "<br /><br />" + marker.getLatLng().lat + '<br />' + marker.getLatLng().lng;
   marker.getPopup().setContent(popupString).openOn(map);
 });
 
