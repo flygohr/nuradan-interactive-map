@@ -10,7 +10,7 @@ window.location.href.replace(
 
 let debugMode = false;
 
-if (params.debug && params.debug == true) {
+if (params.debug == true) {
   debugMode = true;
 }
 
