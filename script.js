@@ -57,9 +57,7 @@ for(i = 0; i < gridH; i++) {
 
 let coordinatesGridGroup = L.layerGroup(coordinatesGridLines)
 
-
 var layerControl = L.control.layers(null, null).addTo(map);
-layerControl.addOverlay(pop, "Settlements")
 
 // PARSE ZONES DATA AND CREATE RECTANGLES
 
