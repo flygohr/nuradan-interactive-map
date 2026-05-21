@@ -15,6 +15,7 @@ if (params.debug == "true") {
 }
 
 // https://nuradan-interactive-map.vercel.app?lat=-16.417943&lng=47.050848&zoom=8
+// https://nuradan-interactive-map.vercel.app/?lat=-16.417943&lng=47.050848&zoom=8&debug=true for debug mode on
 
 let map = L.map("map", {
   crs: L.CRS.Simple,
