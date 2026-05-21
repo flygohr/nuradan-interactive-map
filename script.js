@@ -32,15 +32,6 @@ let base = L.tileLayer('images/base/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://nuradan.flygohr.com" target="_top">Nuradan Project</a>'
 });
 
-let pop = L.tileLayer('images/pop/{z}/{x}/{y}.png', {
-    maxNativeZoom: 8,
-    minNativeZoom: 5,
-    minZoom: 6,
-    maxZoom: 9,
-    noWrap: true,
-    bounds: bounds,
-});
-
 let zones_overlay = L.tileLayer('images/zones/{z}/{x}/{y}.png', {
     maxNativeZoom: 8,
     minNativeZoom: 5,
@@ -51,8 +42,6 @@ let zones_overlay = L.tileLayer('images/zones/{z}/{x}/{y}.png', {
 })
 
 base.addTo(map);
-// roads.addTo(map);
-pop.addTo(map)
 
 // Show gridlines
 let coordinatesGridLines = []
@@ -116,9 +105,6 @@ layerControl.addOverlay(coordinatesGridGroup, "Debug: coordinates grid")
 
 map.setMaxBounds(bounds);
 
-
-
-
 let NuradanIconSmall = L.Icon.extend({
     options: {
         shadowUrl: 'images/icons/64/shadow.png',
@@ -126,7 +112,18 @@ let NuradanIconSmall = L.Icon.extend({
         shadowSize:   [32, 32],
         iconAnchor:   [16, 16],
         shadowAnchor: [16, 16],
-        popupAnchor:  [-16, -16]
+        popupAnchor:  [0, -32]
+    }
+});
+
+let NuradanIconLarge = L.Icon.extend({
+    options: {
+        shadowUrl: 'images/icons/128/shadow.png',
+        iconSize:     [64, 64],
+        shadowSize:   [64, 64],
+        iconAnchor:   [32, 32],
+        shadowAnchor: [32, 32],
+        popupAnchor:  [0, -64]
     }
 });
 
@@ -137,6 +134,8 @@ let markerIcon = new NuradanIconSmall({iconUrl: 'images/icons/64/marker.png'}),
     bridgeIconH = new NuradanIconSmall({iconUrl: 'images/icons/64/bridge_h.png'});
     bridgeIconH = new NuradanIconSmall({iconUrl: 'images/icons/64/bridge_v.png'});
     castleIcon = new NuradanIconSmall({iconUrl: 'images/icons/64/castle.png'});
+
+let townIcon = new NuradanIconLarge({iconUrl: 'images/icons/128/town.png'})
 
 //Coordinate Finder
 let marker = L.marker([-16.320367, 48.311807], {
@@ -153,15 +152,36 @@ marker.on('dragend', function (e) {
 });
 
 //Markers
-// TODO: export icons for cities, castles, ruins, towns, etc to use with markers 
-// https://leafletjs.com/examples/custom-icons/
-let mts_sund = L.marker([-gridSizeCRS*130.5, gridSizeCRS*377.5], {icon: villageIcon}).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>');
-
-let settlementsGroup = L.layerGroup([mts_sund])
 let settlementsLayer = new L.FeatureGroup();
-settlementsLayer.addLayer(settlementsGroup)
-settlementsLayer.addTo(map)
-layerControl.addOverlay(settlementsLayer, "Settlements")
+
+Papa.parse("https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=46754673&single=true&output=csv", {
+    download: true,
+    header: true,
+    dynamicTyping: true,
+    complete: function(results) {
+        console.log(results);
+        createMarkers(results);
+    }
+})
+
+function createMarkers(markersData) {
+
+    let allMarkers = []
+
+    for(i = 0; i < markersData.data.length; i++) {
+
+        let markerHTML = '<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>'
+        var marker = L.marker([markersData.data[i].y, markersData.data[i].x], {icon: villageIcon}).bindPopup(markerHTML)
+
+        allMarkers.push(marker)
+    };
+
+    let settlementsGroup = L.layerGroup(allMarkers)
+    settlementsLayer.addLayer(settlementsGroup)
+    settlementsLayer.addTo(map)
+    layerControl.addOverlay(settlementsLayer, "Points of interest")
+
+}
 
 map.on('zoomend', function() {
     if (map.getZoom() <7){
