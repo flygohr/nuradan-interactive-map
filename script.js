@@ -180,12 +180,13 @@ let marker = L.marker([-16.320367, 48.311807], {
   icon: markerIcon,
   draggable: true,
 }).addTo(map);
-// marker.bindPopup("Move to show coordinates").openPopup();
+marker.bindPopup("Move to show coordinates");
 marker.on("dragend", function (e) {
   let cellLat = Math.trunc(marker.getLatLng().lat / gridSizeCRS);
   let cellLng = Math.trunc(marker.getLatLng().lng / gridSizeCRS);
+  console.log(marker.getLatLng())
   let preciseCoords = marker.getLatLng().toString();
-  let popupString = cellLat + ", " + cellLng + "<br />" + preciseCoords;
+  let popupString = cellLat + "<br />" + cellLng + "<br />" + preciseCoords;
   marker.getPopup().setContent(popupString).openOn(map);
 });
 
