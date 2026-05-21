@@ -110,7 +110,7 @@ function createZones(zonesData) {
           gridSizeCRS * (zonesData.data[i].x + zonesData.data[i].width),
         ], // SW
       ],
-      { color: "#E6D8AB", weight: 1, opacity: 0.4, fillOpacity: 0.1 },
+      { color: "#E6D8AB", weight: 1, opacity: 0.6, fillOpacity: 0.15 },
     );
 
     let popupHTML =
