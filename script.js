@@ -9,13 +9,19 @@ window.location.href.replace(
 );
 
 let debugMode = false;
+let zonesVisible = true;
 
 if (params.debug == "true") {
   debugMode = true;
 }
 
+if (params.zones == "false") {
+  zonesVisible = false;
+}
+
 // https://nuradan-interactive-map.vercel.app?lat=-16.417943&lng=47.050848&zoom=8
 // https://nuradan-interactive-map.vercel.app/?lat=-16.417943&lng=47.050848&zoom=8&debug=true for debug mode on
+// &zones=false to disable autoload of zone boundaries
 
 let map = L.map("map", {
   crs: L.CRS.Simple,
@@ -133,7 +139,9 @@ function createZones(zonesData) {
 
   console.log(zonesRectangles);
   let zone_boundaries = L.layerGroup(zonesRectangles);
-  zone_boundaries.addTo(map)
+  if (zonesVisible == true) {
+    zone_boundaries.addTo(map);
+  }
   layerControl.addOverlay(zone_boundaries, "Zones overlay");
 }
 
