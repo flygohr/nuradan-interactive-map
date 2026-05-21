@@ -57,12 +57,12 @@ pop.addTo(map)
 // Show gridlines
 let coordinatesGridLines = []
 for(i = 0; i < gridW; i++) {
-    let line = L.polyline([[0, i*gridSizeCRS], [-gridSizeCRS*gridH, i*gridSizeCRS]], {color: "#ffffff", weight: 1, opacity: 0.3, fillOpacity: 0.1})
+    let line = L.polyline([[0, i*gridSizeCRS], [-gridSizeCRS*gridH, i*gridSizeCRS]], {color: "#E6D8AB", weight: 1, opacity: 0.3, fillOpacity: 0.1})
     coordinatesGridLines.push(line)
 }
 
 for(i = 0; i < gridH; i++) {
-    let line = L.polyline([[-i*gridSizeCRS, 0], [-i*gridSizeCRS, gridSizeCRS*gridW]], {color: "#ffffff", weight: 1, opacity: 0.3, fillOpacity: 0.1})
+    let line = L.polyline([[-i*gridSizeCRS, 0], [-i*gridSizeCRS, gridSizeCRS*gridW]], {color: "#E6D8AB", weight: 1, opacity: 0.3, fillOpacity: 0.1})
     coordinatesGridLines.push(line)
 }
 
@@ -94,7 +94,7 @@ function createZones(zonesData) {
             [gridSizeCRS * zonesData.data[i].y, gridSizeCRS * zonesData.data[i].x], // NW
             [gridSizeCRS * (zonesData.data[i].y - zonesData.data[i].height), gridSizeCRS * (zonesData.data[i].x + zonesData.data[i].width)] // SW
         ],
-        {color: "#ffffff", weight: 1, opacity: 0.4, fillOpacity: 0.1})
+        {color: "#E6D8AB", weight: 1, opacity: 0.4, fillOpacity: 0.1})
 
         let popupHTML = '<b><a href="' + zonesData.data[i].URL + '" target="_top">' + zonesData.data[i].name + '</a></b>'
         zone.bindPopup(popupHTML)
