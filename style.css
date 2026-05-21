@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+.leaflet-popup-content-wrapper {
+    border-radius: 0 !important;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background-color: #fbf7eb !important;
+    color: #2f2727 !important;
+}
+
+.leaflet-container {
+    font-family:  'Crimson Pro', Georgia, 'Times New Roman', Times, serif;
+}
+
+.leaflet-container a {
+    color: #ab241f !important;
+}
