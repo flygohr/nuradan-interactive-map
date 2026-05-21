@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
+.leaflet-popup-content {
+    font-size: 1rem !important;
+}
+
 .leaflet-popup-content-wrapper {
     border-radius: 0 !important;
 }
@@ -10,9 +14,13 @@
 }
 
 .leaflet-container {
-    font-family:  'Crimson Pro', Georgia, 'Times New Roman', Times, serif;
+    font-family:  'Crimson Pro', Georgia, 'Times New Roman', Times, serif !important;
 }
 
 .leaflet-container a {
     color: #ab241f !important;
+}
+
+.leaflet-popup {
+    text-align: center !important;
 }
