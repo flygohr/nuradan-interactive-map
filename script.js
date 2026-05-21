@@ -104,6 +104,7 @@ function createZones(zonesData) {
 
     console.log(zonesRectangles)
     let zone_boundaries = L.layerGroup(zonesRectangles)
+    zone_boundaries.addTo(map)
     layerControl.addOverlay(zone_boundaries, "Zones")
 
 }
