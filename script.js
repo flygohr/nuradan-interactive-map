@@ -44,14 +44,14 @@ let base = L.tileLayer("images/base/{z}/{x}/{y}.png", {
     '&copy; <a href="https://nuradan.flygohr.com" target="_top">Nuradan Project</a>',
 });
 
-let zones_overlay = L.tileLayer("images/zones/{z}/{x}/{y}.png", {
-  maxNativeZoom: 8,
-  minNativeZoom: 5,
-  minZoom: 6,
-  maxZoom: 8,
-  noWrap: true,
-  bounds: bounds,
-});
+// let zones_overlay = L.tileLayer("images/zones/{z}/{x}/{y}.png", {
+//   maxNativeZoom: 8,
+//   minNativeZoom: 5,
+//   minZoom: 6,
+//   maxZoom: 8,
+//   noWrap: true,
+//   bounds: bounds,
+// });
 
 base.addTo(map);
 
@@ -127,10 +127,10 @@ function createZones(zonesData) {
   console.log(zonesRectangles);
   let zone_boundaries = L.layerGroup(zonesRectangles);
   // zone_boundaries.addTo(map)
-  layerControl.addOverlay(zone_boundaries, "Zones");
+  layerControl.addOverlay(zone_boundaries, "Zones overlay");
 }
 
-layerControl.addOverlay(zones_overlay, "Debug: zone boundaries");
+// layerControl.addOverlay(zones_overlay, "Debug: zone boundaries");
 layerControl.addOverlay(coordinatesGridGroup, "Debug: coordinates grid");
 
 // TODO: add hover effects
