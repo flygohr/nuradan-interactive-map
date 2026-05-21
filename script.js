@@ -126,7 +126,7 @@ let NuradanIconSmall = L.Icon.extend({
         shadowSize:   [32, 32],
         iconAnchor:   [16, 16],
         shadowAnchor: [16, 16],
-        popupAnchor:  [16, -16]
+        popupAnchor:  [-16, -16]
     }
 });
 
@@ -155,17 +155,19 @@ marker.on('dragend', function (e) {
 //Markers
 // TODO: export icons for cities, castles, ruins, towns, etc to use with markers 
 // https://leafletjs.com/examples/custom-icons/
-var mts_sund = L.marker([-gridSizeCRS*130.5, gridSizeCRS*377.5], {icon: villageIcon}).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>');
+let mts_sund = L.marker([-gridSizeCRS*130.5, gridSizeCRS*377.5], {icon: villageIcon}).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>');
 
-var settlementsGroup = L.layerGroup([mts_sund])
-settlementsGroup.addTo(map)
-layerControl.addOverlay(POIs, "Settlements")
+let settlementsGroup = L.layerGroup([mts_sund])
+let settlementsLayer = new L.FeatureGroup();
+settlementsLayer.addLayer(settlementsGroup)
+settlementsLayer.addTo(map)
+layerControl.addOverlay(settlementsLayer, "Settlements")
 
 map.on('zoomend', function() {
     if (map.getZoom() <7){
-            map.removeLayer(settlementsGroup);
+            map.removeLayer(settlementsLayer);
     }
     else {
-            map.addLayer(settlementsGroup);
+            map.addLayer(settlementsLayer);
         }
 });
