@@ -8,6 +8,12 @@ window.location.href.replace(
   },
 );
 
+let debugMode = false;
+
+if (params.debug && params.debug == true) {
+  debugMode = true;
+}
+
 // https://nuradan-interactive-map.vercel.app?lat=-16.417943&lng=47.050848&zoom=8
 
 let map = L.map("map", {
@@ -131,7 +137,9 @@ function createZones(zonesData) {
 }
 
 // layerControl.addOverlay(zones_overlay, "Debug: zone boundaries");
-layerControl.addOverlay(coordinatesGridGroup, "Debug: coordinates grid");
+if (debugMode == true) {
+  layerControl.addOverlay(coordinatesGridGroup, "Debug: coordinates grid");
+}
 
 // TODO: add hover effects
 
@@ -175,20 +183,29 @@ castleIcon = new NuradanIconSmall({ iconUrl: "images/icons/64/castle.png" });
 
 let townIcon = new NuradanIconLarge({ iconUrl: "images/icons/128/town.png" });
 
-//Coordinate Finder
-let marker = L.marker([-16.320367, 48.311807], {
-  icon: markerIcon,
-  draggable: true,
-}).addTo(map);
-marker.bindPopup("Move to show coordinates");
-marker.on("dragend", function (e) {
-  let cellLat = Math.trunc(marker.getLatLng().lat / gridSizeCRS);
-  let cellLng = Math.trunc(marker.getLatLng().lng / gridSizeCRS);
-  console.log(marker.getLatLng())
-  let preciseCoords = marker.getLatLng().toString();
-  let popupString = cellLat + "<br />" + cellLng + "<br /><br />" + marker.getLatLng().lat + '<br />' + marker.getLatLng().lng;
-  marker.getPopup().setContent(popupString).openOn(map);
-});
+if (debugMode == true) {
+  //Coordinate Finder
+  let marker = L.marker([-16.320367, 48.311807], {
+    icon: markerIcon,
+    draggable: true,
+  }).addTo(map);
+  marker.bindPopup("Move to show coordinates");
+  marker.on("dragend", function (e) {
+    let cellLat = Math.trunc(marker.getLatLng().lat / gridSizeCRS);
+    let cellLng = Math.trunc(marker.getLatLng().lng / gridSizeCRS);
+    console.log(marker.getLatLng());
+    let preciseCoords = marker.getLatLng().toString();
+    let popupString =
+      cellLat +
+      "<br />" +
+      cellLng +
+      "<br /><br />" +
+      marker.getLatLng().lat +
+      "<br />" +
+      marker.getLatLng().lng;
+    marker.getPopup().setContent(popupString).openOn(map);
+  });
+}
 
 //Markers
 let settlementsLayer = new L.FeatureGroup();
