@@ -1,7 +1,7 @@
 //Creating the Map
 var map = L.map('map', {
     crs: L.CRS.Simple,
-    center: [-15.856962, 47.862135],
+    center: [-15.856962, 47.862135], // change it to receive URL parameters https://blog.mastermaps.com/2012/10/how-to-control-your-leaflet-map-with.html
     zoom: 7,
 });
 
@@ -130,4 +130,5 @@ marker.on('dragend', function (e) {
 
 //Markers
 // TODO: export icons for cities, castles, ruins, towns, etc to use with markers 
+// https://leafletjs.com/examples/custom-icons/
 var mts_sund = L.marker([-gridSizeCRS*130.5, gridSizeCRS*377.5]).bindPopup('<b><a href="https://worldbuilding.flygohr.com/Sund" target="_top">Sund</a></b>').addTo(map);
