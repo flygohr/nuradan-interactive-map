@@ -26,7 +26,7 @@ let base = L.tileLayer('images/base/{z}/{x}/{y}.png', {
     maxNativeZoom: 8,
     minNativeZoom: 5,
     minZoom: 4,
-    maxZoom: 9,
+    maxZoom: 8,
     noWrap: true,
     bounds: bounds,
     attribution: '&copy; <a href="https://nuradan.flygohr.com" target="_top">Nuradan Project</a>'
@@ -36,7 +36,7 @@ let zones_overlay = L.tileLayer('images/zones/{z}/{x}/{y}.png', {
     maxNativeZoom: 8,
     minNativeZoom: 5,
     minZoom: 6,
-    maxZoom: 9,
+    maxZoom: 8,
     noWrap: true,
     bounds: bounds,
 })
