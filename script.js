@@ -110,7 +110,7 @@ let NuradanIconSmall = L.Icon.extend({
         shadowSize: [32, 32],
         iconAnchor: [16, 16],
         shadowAnchor: [16, 16],
-        popupAnchor: [0, -32]
+        popupAnchor: [0, -8]
     }
 });
 
@@ -121,7 +121,7 @@ let NuradanIconLarge = L.Icon.extend({
         shadowSize: [64, 64],
         iconAnchor: [32, 32],
         shadowAnchor: [32, 32],
-        popupAnchor: [0, -64]
+        popupAnchor: [0, -16]
     }
 });
 
