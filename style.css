@@ -24,3 +24,11 @@
 .leaflet-popup {
     text-align: center !important;
 }
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out {
+    color: #2f2727 !important;
+}
+
+.leaflet-control-layers-selector {
+    
+}
