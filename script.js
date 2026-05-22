@@ -111,6 +111,8 @@ Papa.parse(
   },
 );
 
+let zonesLayer = new L.FeatureGroup();
+
 function createZones(zonesData) {
   let zonesRectangles = [];
 
@@ -137,12 +139,13 @@ function createZones(zonesData) {
     zonesRectangles.push(zone);
   }
 
-  console.log(zonesRectangles);
   let zone_boundaries = L.layerGroup(zonesRectangles);
+  zonesLayer.addLayer(zone_boundaries)
   if (zonesVisible == true) {
-    zone_boundaries.addTo(map);
+    zonesLayer.addTo(map);
   }
-  layerControl.addOverlay(zone_boundaries, "Zones overlay");
+  layerControl.addOverlay(zonesLayer, "Zones overlay");
+  
 }
 
 // layerControl.addOverlay(zones_overlay, "Debug: zone boundaries");
@@ -159,9 +162,8 @@ let NuradanIconSmall = L.Icon.extend({
     shadowUrl: "images/icons/64/shadow.png",
     iconSize: [32, 32],
     shadowSize: [32, 32],
-    iconAnchor: [16, 16],
-    shadowAnchor: [16, 16],
-    popupAnchor: [0, -8],
+    iconAnchor: [16, 30],
+    popupAnchor: [0, -30],
   },
 });
 
@@ -170,9 +172,8 @@ let NuradanIconLarge = L.Icon.extend({
     shadowUrl: "images/icons/128/shadow.png",
     iconSize: [64, 64],
     shadowSize: [64, 64],
-    iconAnchor: [32, 32],
-    shadowAnchor: [32, 32],
-    popupAnchor: [0, -16],
+    iconAnchor: [32, 60],
+    popupAnchor: [0, -60],
   },
 });
 
@@ -191,6 +192,9 @@ bridgeIconV = new NuradanIconSmall({ iconUrl: "images/icons/64/bridge_v.png" });
 castleIcon = new NuradanIconSmall({ iconUrl: "images/icons/64/castle.png" });
 
 let townIcon = new NuradanIconLarge({ iconUrl: "images/icons/128/town.png" });
+let regionIcon = new NuradanIconLarge({
+  iconUrl: "images/icons/128/region.png",
+});
 
 if (debugMode == true) {
   //Coordinate Finder
@@ -218,6 +222,7 @@ if (debugMode == true) {
 
 //Markers
 let settlementsLayer = new L.FeatureGroup();
+let regionsLayer = new L.FeatureGroup();
 
 Papa.parse(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSM4eS6uvkkqNa3oiwHHxu6aO7HTzRv4OcJSNQyKjl7IL6zcldcO9QoF2KWt__ZtvmMsQ74aTogYREQ/pub?gid=46754673&single=true&output=csv",
@@ -234,6 +239,7 @@ Papa.parse(
 
 function createMarkers(markersData) {
   let allMarkers = [];
+  let regionMarkers = [];
 
   for (i = 0; i < markersData.data.length; i++) {
     let markerTypeIcon;
@@ -259,6 +265,9 @@ function createMarkers(markersData) {
       case "town":
         markerTypeIcon = townIcon;
         break;
+      case "region":
+        markerTypeIcon = regionIcon;
+        break;
       default:
         markerTypeIcon = markerIcon;
     }
@@ -273,8 +282,14 @@ function createMarkers(markersData) {
       icon: markerTypeIcon,
     }).bindPopup(markerHTML);
 
-    allMarkers.push(marker);
+    if (markersData.data[i].type == "region") {
+      regionMarkers.push(marker);
+    } else allMarkers.push(marker);
   }
+
+  let regionsGroup = L.layerGroup(regionMarkers);
+  regionsLayer.addLayer(regionsGroup);
+  layerControl.addOverlay(regionsLayer, "Regions");
 
   let settlementsGroup = L.layerGroup(allMarkers);
   settlementsLayer.addLayer(settlementsGroup);
@@ -285,7 +300,11 @@ function createMarkers(markersData) {
 map.on("zoomend", function () {
   if (map.getZoom() < 7) {
     map.removeLayer(settlementsLayer);
+    map.addLayer(regionsLayer);
+    map.removeLayer(zonesLayer);
   } else {
     map.addLayer(settlementsLayer);
+    map.removeLayer(regionsLayer);
+    map.addLayer(zonesLayer)
   }
 });
