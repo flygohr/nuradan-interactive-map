@@ -109,7 +109,7 @@ for (i = 0; i < gridH; i++) {
     ],
     { color: "#E6D8AB", weight: 1, opacity: 0.3, fillOpacity: 0.1 },
   );
-  coordinatesGridLines.push(line);
+  coordinatesGridLines.push(line); 
 }
 
 let coordinatesGridGroup = L.layerGroup(coordinatesGridLines);
