@@ -19,32 +19,52 @@ if (params.zones == "false") {
   zonesVisible = false;
 }
 
-// https://nuradan-interactive-map.vercel.app?lat=-16.417943&lng=47.050848&zoom=8
-// https://nuradan-interactive-map.vercel.app/?lat=-16.417943&lng=47.050848&zoom=8&debug=true for debug mode on
-// &zones=false to disable autoload of zone boundaries
-
-let map = L.map("map", {
-  crs: L.CRS.Simple,
-  center: [params.lat || -22, params.lng || 39], // change it to receive URL parameters https://blog.mastermaps.com/2012/10/how-to-control-your-leaflet-map-with.html
-  zoom: params.zoom || 7,
-});
-
 let tilesH = 44;
 let tilesW = 78;
 let tileSize = 256;
 let maxZoom = 8;
+
+// avoid URL passing zoom breaking parameters
+
+if (params.zoom < 4) {
+  params.zoom = 4
+}
+
+if (params.zoom > 8) {
+  params.zoom = 8
+}
+
+if (params.lat > 0) {
+  params.lat = 0
+} 
+
+if (params.lat < -tilesW) {
+  params.lat = -tilesW
+}
+
+if (params.lng < 0) {
+  params.lng = 0
+} 
+
+if (params.lng > tilesW) {
+  params.lng = tilesW
+}
+
+let map = L.map("map", {
+  crs: L.CRS.Simple,
+  center: [params.lat || -22, params.lng || 39],
+  zoom: params.zoom || 7,
+});
+
 let sw = map.unproject([0, tilesH * tileSize], maxZoom);
 let ne = map.unproject([tilesW * tileSize, 0], maxZoom);
 let bounds = L.latLngBounds(sw, ne);
-
 let gridSize = tileSize / 8;
 let gridW = (tileSize * tilesW) / gridSize;
 let gridH = (tileSize * tilesH) / gridSize;
 let gridSizeCRS = tilesW / gridW;
 
 // console.log(gridSizeCRS) // 0.125, or grid step size for mapping grid purposes
-
-// gdal raster tile --webviewer leaflet --tiling-scheme raster --tile-size 256 --min-zoom=5 --max-zoom=8 map.png layer_folder
 
 let base = L.tileLayer("images/base/{z}/{x}/{y}.png", {
   maxNativeZoom: 8,
@@ -94,7 +114,10 @@ for (i = 0; i < gridH; i++) {
 
 let coordinatesGridGroup = L.layerGroup(coordinatesGridLines);
 
-let layerControl = L.control.layers(null, null).addTo(map);
+let layerControl = L.control.layers(null, null);
+if (debugMode == true) {
+  layerControl.addTo(map);
+}
 
 // PARSE ZONES DATA AND CREATE RECTANGLES
 
@@ -140,12 +163,12 @@ function createZones(zonesData) {
   }
 
   let zone_boundaries = L.layerGroup(zonesRectangles);
-  zonesLayer.addLayer(zone_boundaries)
+  zonesLayer.addLayer(zone_boundaries);
+
   if (zonesVisible == true) {
-    zonesLayer.addTo(map);
+    zonesLayer.addTo(map); // when I sort out the controlLayers I'll be able to take advantage of this
   }
-  layerControl.addOverlay(zonesLayer, "Zones overlay");
-  
+  // layerControl.addOverlay(zonesLayer, "Zones overlay");
 }
 
 // layerControl.addOverlay(zones_overlay, "Debug: zone boundaries");
@@ -221,7 +244,7 @@ if (debugMode == true) {
 }
 
 //Markers
-let settlementsLayer = new L.FeatureGroup();
+let landmarksLayer = new L.FeatureGroup();
 let regionsLayer = new L.FeatureGroup();
 
 Papa.parse(
@@ -289,22 +312,48 @@ function createMarkers(markersData) {
 
   let regionsGroup = L.layerGroup(regionMarkers);
   regionsLayer.addLayer(regionsGroup);
-  layerControl.addOverlay(regionsLayer, "Regions");
+  // layerControl.addOverlay(regionsLayer, "Regions");
 
-  let settlementsGroup = L.layerGroup(allMarkers);
-  settlementsLayer.addLayer(settlementsGroup);
-  settlementsLayer.addTo(map);
-  layerControl.addOverlay(settlementsLayer, "Points of interest");
+  let landmarksGroup = L.layerGroup(allMarkers);
+  landmarksLayer.addLayer(landmarksGroup);
+  landmarksLayer.addTo(map);
+  // layerControl.addOverlay(landmarksLayer, "Points of interest");
 }
 
-map.on("zoomend", function () {
-  if (map.getZoom() < 7) {
-    map.removeLayer(settlementsLayer);
-    map.addLayer(regionsLayer);
-    map.removeLayer(zonesLayer);
-  } else {
-    map.addLayer(settlementsLayer);
-    map.removeLayer(regionsLayer);
-    map.addLayer(zonesLayer)
-  }
+map.on("load", function () {
+  displayLevels(map.getZoom());
 });
+
+map.on("zoomend", function () {
+  displayLevels(map.getZoom());
+});
+
+function displayLevels(zoomLevel) {
+  switch (zoomLevel) {
+    case 4:
+      map.removeLayer(regionsLayer);
+      map.removeLayer(landmarksLayer);
+      map.removeLayer(zonesLayer);
+      break;
+    case 5:
+      map.addLayer(regionsLayer);
+      map.removeLayer(landmarksLayer);
+      map.removeLayer(zonesLayer);
+      break;
+    case 6:
+      map.addLayer(regionsLayer);
+      map.removeLayer(landmarksLayer);
+      map.removeLayer(zonesLayer);
+      break;
+    case 7:
+      map.removeLayer(regionsLayer);
+      map.addLayer(landmarksLayer);
+      map.removeLayer(zonesLayer);
+      break;
+    case 8:
+      map.removeLayer(regionsLayer);
+      map.addLayer(landmarksLayer);
+      map.addLayer(zonesLayer);
+      break;
+  }
+}
