@@ -165,7 +165,7 @@ function createZones(zonesData) {
   let zone_boundaries = L.layerGroup(zonesRectangles);
   zonesLayer.addLayer(zone_boundaries);
 
-  if (zonesVisible == true) {
+  if (zonesVisible == true & map.getZoom() > 7) {
     zonesLayer.addTo(map); // when I sort out the controlLayers I'll be able to take advantage of this
   }
   // layerControl.addOverlay(zonesLayer, "Zones overlay");
@@ -312,16 +312,23 @@ function createMarkers(markersData) {
 
   let regionsGroup = L.layerGroup(regionMarkers);
   regionsLayer.addLayer(regionsGroup);
+  if (map.getZoom() > 4 & map.getZoom() < 6) {
+    regionsLayer.addTo(map);
+  }
   // layerControl.addOverlay(regionsLayer, "Regions");
 
   let landmarksGroup = L.layerGroup(allMarkers);
   landmarksLayer.addLayer(landmarksGroup);
-  landmarksLayer.addTo(map);
+  if (map.getZoom() > 6) {
+    landmarksLayer.addTo(map);
+  }
   // layerControl.addOverlay(landmarksLayer, "Points of interest");
 }
 
+displayLevels(map.getZoom())
+
 map.on("load", function () {
-  displayLevels(params.zoom || 7);
+  displayLevels(map.getZoom());
 });
 
 map.on("zoomend", function () {
