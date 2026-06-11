@@ -321,7 +321,7 @@ function createMarkers(markersData) {
 }
 
 map.on("load", function () {
-  displayLevels(map.getZoom());
+  displayLevels(params.zoom || 7);
 });
 
 map.on("zoomend", function () {
