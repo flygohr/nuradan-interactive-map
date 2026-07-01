@@ -115,9 +115,10 @@ for (i = 0; i < gridH; i++) {
 let coordinatesGridGroup = L.layerGroup(coordinatesGridLines);
 
 let layerControl = L.control.layers(null, null);
-if (debugMode == true) {
-  layerControl.addTo(map);
-}
+layerControl.addTo(map);
+// if (debugMode == true) {
+  // layerControl.addTo(map);
+// }
 
 // PARSE ZONES DATA AND CREATE RECTANGLES
 
@@ -338,29 +339,99 @@ map.on("zoomend", function () {
 function displayLevels(zoomLevel) {
   switch (zoomLevel) {
     case 4:
+
+      if (debugMode == false) {
+        layerControl.remove()
+      }
+
       map.removeLayer(regionsLayer);
+      layerControl.removeLayer(regionsLayer)
+
       map.removeLayer(landmarksLayer);
+      layerControl.removeLayer(landmarksLayer)
+
       map.removeLayer(zonesLayer);
+      layerControl.removeLayer(zonesLayer)
+
       break;
     case 5:
-      map.addLayer(regionsLayer);
+
+      if (debugMode == false) {
+        layerControl.addTo(map)
+      }
+
+      map.removeLayer(regionsLayer);
+      layerControl.removeLayer(regionsLayer)
+
       map.removeLayer(landmarksLayer);
+      layerControl.removeLayer(landmarksLayer)
+
       map.removeLayer(zonesLayer);
+      layerControl.removeLayer(zonesLayer)
+      
+      map.addLayer(regionsLayer);
+      layerControl.addOverlay(regionsLayer, "Region markers")
+
       break;
     case 6:
-      map.addLayer(regionsLayer);
+
+      if (debugMode == false) {
+        layerControl.addTo(map)
+      }
+
+      map.removeLayer(regionsLayer);
+      layerControl.removeLayer(regionsLayer)
+
       map.removeLayer(landmarksLayer);
+      layerControl.removeLayer(landmarksLayer)
+
       map.removeLayer(zonesLayer);
+      layerControl.removeLayer(zonesLayer)
+      
+      map.addLayer(regionsLayer);
+      layerControl.addOverlay(regionsLayer, "Region markers")
+
       break;
     case 7:
+
+      if (debugMode == false) {
+        layerControl.addTo(map)
+      }
+
       map.removeLayer(regionsLayer);
-      map.addLayer(landmarksLayer);
+      layerControl.removeLayer(regionsLayer)
+
+      map.removeLayer(landmarksLayer);
+      layerControl.removeLayer(landmarksLayer)
+
       map.removeLayer(zonesLayer);
+      layerControl.removeLayer(zonesLayer)
+
+      map.addLayer(landmarksLayer);
+      layerControl.addOverlay(landmarksLayer, "Points of interest");
+      
       break;
     case 8:
+
+      if (debugMode == false) {
+        layerControl.addTo(map)
+      }
+
       map.removeLayer(regionsLayer);
+      layerControl.removeLayer(regionsLayer)
+
+      map.removeLayer(landmarksLayer);
+      layerControl.removeLayer(landmarksLayer)
+
+      map.removeLayer(zonesLayer);
+      layerControl.removeLayer(zonesLayer)
+
       map.addLayer(landmarksLayer);
+      layerControl.addOverlay(landmarksLayer, "Points of interest");
+
       map.addLayer(zonesLayer);
+      layerControl.addOverlay(zonesLayer, "Zone boundaries");
+
       break;
   }
 }
